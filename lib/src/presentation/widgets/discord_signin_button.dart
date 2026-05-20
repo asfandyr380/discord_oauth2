@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 
+/// A pre-styled, official-branded Discord sign-in button.
+///
+/// Features the official Discord brand color (#5865F2 Blurple) and the Discord icon.
 class DiscordSignInButton extends StatelessWidget {
+  /// Callback triggered when the button is pressed. Typically kicks off the OAuth2 flow.
   final VoidCallback onPressed;
+
+  /// Custom label widget. If null, defaults to a Text widget containing 'Sign in with Discord'.
   final Widget? label;
 
+  /// Creates a [DiscordSignInButton] widget.
   const DiscordSignInButton({super.key, required this.onPressed, this.label});
 
   @override
