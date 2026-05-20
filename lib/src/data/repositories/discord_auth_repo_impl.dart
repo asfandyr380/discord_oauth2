@@ -56,17 +56,14 @@ class DiscordAuthRepositoryImpl implements DiscordAuthRepository {
       );
     }
 
-    if (state != null && returnedState != state) {
-      throw DiscordAuthFailedException(
-        'State mismatch: Expected "$state" but got "$returnedState".',
-        'state_mismatch',
-      );
-    }
-
     if (code == null) {
       throw const DiscordAuthCodeMissingException();
     }
 
-    return DiscordAuthResult(code: code, codeVerifier: pkce.codeVerifier);
+    return DiscordAuthResult(
+      code: code,
+      codeVerifier: pkce.codeVerifier,
+      state: returnedState,
+    );
   }
 }

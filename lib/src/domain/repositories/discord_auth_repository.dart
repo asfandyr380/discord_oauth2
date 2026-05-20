@@ -1,7 +1,12 @@
 class DiscordAuthResult {
   final String code;
   final String codeVerifier;
-  const DiscordAuthResult({required this.code, required this.codeVerifier});
+  final String? state;
+  const DiscordAuthResult({
+    required this.code,
+    required this.codeVerifier,
+    this.state,
+  });
 }
 
 abstract interface class DiscordAuthRepository {
