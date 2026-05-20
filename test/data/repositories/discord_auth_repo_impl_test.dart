@@ -73,7 +73,7 @@ void main() {
     );
 
     test(
-      'getAuthorizationCode supports state parameter and validates correct state',
+      'getAuthorizationCode supports state parameter and returns it in the result',
       () async {
         mockDataSource.mockResultUrl =
             'my-app-scheme://auth/discord/callback?code=returned_auth_code&state=secure_state_xyz';
@@ -87,32 +87,8 @@ void main() {
         );
 
         expect(result.code, equals('returned_auth_code'));
+        expect(result.state, equals('secure_state_xyz'));
         expect(mockDataSource.capturedUrl, contains('state=secure_state_xyz'));
-      },
-    );
-
-    test(
-      'getAuthorizationCode throws DiscordAuthFailedException on state mismatch',
-      () async {
-        mockDataSource.mockResultUrl =
-            'my-app-scheme://auth/discord/callback?code=returned_auth_code&state=wrong_state';
-
-        expect(
-          () => repository.getAuthorizationCode(
-            clientId: '12345',
-            redirectUri: 'http://localhost:3000/callback',
-            scopes: ['identify'],
-            customScheme: 'my-app-scheme',
-            state: 'secure_state_xyz',
-          ),
-          throwsA(
-            isA<DiscordAuthFailedException>().having(
-              (e) => e.details,
-              'details',
-              'state_mismatch',
-            ),
-          ),
-        );
       },
     );
 

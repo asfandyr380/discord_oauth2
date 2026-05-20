@@ -73,6 +73,7 @@ void main() {
         final expectedResult = const DiscordAuthResult(
           code: 'auth_code_xyz',
           codeVerifier: 'verifier_xyz',
+          state: 'custom_state_123',
         );
         mockRepository.mockResult = expectedResult;
 
