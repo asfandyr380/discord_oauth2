@@ -1,4 +1,4 @@
-## 0.0.1
+## 1.0.0
 
 * Initial release of `discord_oauth2`.
 * Fully secure PKCE (Proof Key for Code Exchange) flow generation using SHA-256 challenges.

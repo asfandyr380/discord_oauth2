@@ -1,6 +1,6 @@
 name: discord_oauth2
 description: A lightweight, secure, and ready-to-use Flutter package to integrate Discord OAuth2 login with PKCE support.
-version: 0.0.1
+version: 1.0.0
 homepage: https://github.com/asfandyr380/discord_oauth2
 repository: https://github.com/asfandyr380/discord_oauth2
 issue_tracker: https://github.com/asfandyr380/discord_oauth2/issues
