@@ -20,11 +20,6 @@ class DiscordSignIn {
   /// For example, if your redirect is `my-app://auth/discord`, the [customScheme] is `my-app`.
   final String customScheme;
 
-  /// The list of OAuth2 scopes requesting user permissions.
-  ///
-  /// Defaults to `['identify', 'email']`.
-  final List<String> scopes;
-
   late final DiscordAuthRepository _repository;
 
   /// Creates a [DiscordSignIn] helper client.
@@ -32,13 +27,11 @@ class DiscordSignIn {
   /// * [clientId]: The Discord client ID of your application.
   /// * [redirectUri]: The redirect URL registered in the Discord developer portal.
   /// * [customScheme]: The custom URI scheme to redirect back to mobile devices.
-  /// * [scopes]: The list of scopes requested (defaults to `['identify', 'email']`).
   /// * [repository]: An optional [DiscordAuthRepository] to override the default implementation. Used for mock testing.
   DiscordSignIn({
     required this.clientId,
     required this.redirectUri,
     required this.customScheme,
-    this.scopes = const ['identify', 'email'],
     DiscordAuthRepository? repository,
   }) {
     // Inversion of Control: dependency injection made ready for mock testing
@@ -55,7 +48,11 @@ class DiscordSignIn {
   /// Throws a [DiscordAuthException] if the authorization fails or is cancelled.
   ///
   /// * [state]: An optional parameter to maintain state and prevent CSRF attacks.
-  Future<DiscordAuthResult> getAuthCode({String? state}) async {
+  /// * [scopes]: The list of scopes requested (defaults to `['identify', 'email']`).
+  Future<DiscordAuthResult> getAuthCode({
+    String? state,
+    List<String> scopes = const ['identify', 'email'],
+  }) async {
     return await _repository.getAuthorizationCode(
       clientId: clientId,
       redirectUri: redirectUri,

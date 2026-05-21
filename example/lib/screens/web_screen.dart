@@ -15,7 +15,6 @@ class _WebScreenState extends State<WebScreen> {
     clientId: '1506189735058473101',
     redirectUri: 'http://localhost:3000/auth/discord/callback',
     customScheme: 'my-app-scheme',
-    scopes: ['identify', 'email'],
   );
 
   bool _isLoading = false;
@@ -34,6 +33,7 @@ class _WebScreenState extends State<WebScreen> {
     try {
       final result = await _discordSignIn.getAuthCode(
         state: 'web_secure_state_987',
+        scopes: ['identify', 'email'],
       );
 
       setState(() {

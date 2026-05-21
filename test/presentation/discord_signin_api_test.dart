@@ -45,7 +45,7 @@ void main() {
       mockRepository = MockDiscordAuthRepository();
     });
 
-    test('initializes with default scopes when not specified', () {
+    test('uses default scopes when not specified in getAuthCode', () async {
       final signIn = DiscordSignIn(
         clientId: 'client123',
         redirectUri: 'http://localhost/callback',
@@ -56,7 +56,9 @@ void main() {
       expect(signIn.clientId, equals('client123'));
       expect(signIn.redirectUri, equals('http://localhost/callback'));
       expect(signIn.customScheme, equals('my-app'));
-      expect(signIn.scopes, equals(['identify', 'email']));
+
+      await signIn.getAuthCode();
+      expect(mockRepository.capturedScopes, equals(['identify', 'email']));
     });
 
     test(
@@ -66,7 +68,6 @@ void main() {
           clientId: 'client123',
           redirectUri: 'http://localhost/callback',
           customScheme: 'my-app',
-          scopes: ['identify', 'guilds'],
           repository: mockRepository,
         );
 
@@ -77,7 +78,10 @@ void main() {
         );
         mockRepository.mockResult = expectedResult;
 
-        final result = await signIn.getAuthCode(state: 'custom_state_123');
+        final result = await signIn.getAuthCode(
+          state: 'custom_state_123',
+          scopes: ['identify', 'guilds'],
+        );
 
         expect(result, equals(expectedResult));
         expect(mockRepository.capturedClientId, equals('client123'));

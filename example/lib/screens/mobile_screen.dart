@@ -14,7 +14,6 @@ class _MobileScreenState extends State<MobileScreen> {
     clientId: '1506189735058473101',
     redirectUri: 'http://localhost:3000/auth/discord/callback',
     customScheme: 'my-app-scheme',
-    scopes: ['identify'],
   );
 
   bool _isLoading = false;
@@ -33,6 +32,7 @@ class _MobileScreenState extends State<MobileScreen> {
     try {
       final result = await _discordSignIn.getAuthCode(
         state: 'mobile_secure_state',
+        scopes: ['identify'],
       );
 
       setState(() {
