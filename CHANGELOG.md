@@ -1,3 +1,8 @@
+## 1.0.1
+
+* Moved the `scopes` parameter from the `DiscordSignIn` constructor to the `getAuthCode` method to allow dynamic scope requesting per authorization call.
+* Updated test suite, example app code, and README documentation to match the new API structure.
+
 ## 1.0.0
 
 * Initial release of `discord_oauth2`.
