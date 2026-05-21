@@ -135,7 +135,6 @@ class _LoginScreenState extends State<LoginScreen> {
     clientId: 'YOUR_DISCORD_CLIENT_ID',
     redirectUri: 'https://auth.yourdomain.com/discord/callback',
     customScheme: 'my-app-scheme',
-    scopes: ['identify', 'email'],
   );
 
   bool _isLoading = false;
@@ -147,6 +146,7 @@ class _LoginScreenState extends State<LoginScreen> {
       // 2. Launch browser auth flow
       final result = await _discordSignIn.getAuthCode(
         state: 'secure_random_state_string',
+        scopes: ['identify', 'email'],
       );
 
       // 3. Send authorization code and verifier to your backend
