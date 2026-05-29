@@ -1,3 +1,7 @@
+## 1.0.2
+
+* Exposed `DiscordAuthResult` from the package root export so it can be imported directly by consumers.
+
 ## 1.0.1
 
 * Moved the `scopes` parameter from the `DiscordSignIn` constructor to the `getAuthCode` method to allow dynamic scope requesting per authorization call.
